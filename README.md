@@ -1,8 +1,6 @@
-# MongoDB ObjectID Toolkit
+# MongoDB ObjectID Toolkit [![License: Apache License 2.0](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://opensource.org/license/apache-2-0)
 
 A powerful command-line utility for working with MongoDB ObjectIDs. Decode existing ObjectIDs, encode components into new ObjectIDs, and generate ObjectIDs in bulk with flexible specifications.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
 
