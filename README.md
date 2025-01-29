@@ -6,14 +6,11 @@ A powerful command-line utility for working with MongoDB ObjectIDs. Decode exist
 
 - **Decode ObjectIDs**
   - Extract timestamp, machine ID, process ID, and counter
-  - Human-readable output with ISO 8601 timestamps
 - **Encode Components**
   - Create valid ObjectIDs from individual components
-  - Strict input validation for all fields
 - **Bulk Generation**
   - Generate multiple ObjectIDs using ranges/lists/files
   - Supports time ranges, machine ID lists, counter sequences
-  - File output capability with progress reporting
 
 ## Installation
 
