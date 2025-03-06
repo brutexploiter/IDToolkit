@@ -62,4 +62,4 @@ python3 uuidv1.py sandwich <UUID1> <UUID2> [-o OUTPUT] [-m MACHINES]
 ```
 
 ## License
-This project is open-source and licensed under the [MIT License](LICENSE).
+This project is licensed under the Apache License 2.0 - see the [LICENSE](https://github.com/brutexploiter/IDToolkit/blob/main/LICENSE) file for details
