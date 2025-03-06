@@ -1,5 +1,4 @@
-# MongoDB ObjectID [![License: Apache License 2.0](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://opensource.org/license/apache-2-0)
-
+# MongoDB ObjectID
 A powerful command-line utility for working with MongoDB ObjectIDs. Decode existing ObjectIDs, encode components into new ObjectIDs, and generate ObjectIDs in bulk with flexible specifications.
 
 ## Features
@@ -16,7 +15,7 @@ A powerful command-line utility for working with MongoDB ObjectIDs. Decode exist
 
 1. **Download the script**
 ```bash
-curl -O https://raw.githubusercontent.com/brutexploiter/mongodb_oid/main/mongodb_oid
+curl -O https://raw.githubusercontent.com/brutexploiter/idtoolkit/main/mongodb-objectid/mongodb_oid
 ```
 2. **Make executable**
 
@@ -101,4 +100,4 @@ MongoDB ObjectIDs are 24-character hexadecimal strings representing:
   
 
 ## License
-This project is licensed under the Apache License 2.0 - see the [LICENSE](https://github.com/brutexploiter/mongodb_oid/blob/main/LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](https://github.com/brutexploiter/idtoolkit/blob/main/LICENSE) file for details.
