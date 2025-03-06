@@ -5,11 +5,8 @@ A powerful command-line script for generating, decoding **UUID v1**. This script
 ## Features
 - **Decode UUID v1**: Extract timestamp, clock sequence, and node (MAC/random).
 - **Generate UUIDs**: Create new UUID v1 values with flexible input options.
-- **UUID Range Generation**: Generate all possible UUIDs within a given range.
-- **Bulk UUID Generation**: Generate and save UUIDs in bulk.
 
 ## Installation
-This script requires **Python 3**.
 
 ```bash
 # Clone the repository
@@ -25,6 +22,12 @@ Run the script using:
 ```bash
 python3 uuidv1.py [command] [options]
 ```
+
+    Command:
+    
+    decode              Decode a UUID v1 and extract details
+    sandwich            Generate all UUIDs between two UUID v1 values
+    generate            Generate UUID v1 values based on parameters
 
 ### **1. Decode a UUID v1**
 Extracts details such as timestamp, clock sequence, and node.
@@ -56,21 +59,6 @@ python3 uuidv1.py generate -t 1704505500 -c 1000 -n ffffffffffff
 Generate all UUIDs between two given UUID v1 values.
 ```bash
 python3 uuidv1.py sandwich <UUID1> <UUID2> [-o OUTPUT] [-m MACHINES]
-```
-**Example:**
-```bash
-python3 uuidv1.py sandwich 55b2e60c-b5a6-11ee-802a-acde48001122 55b2e60d-b5a6-11ee-802a-acde480011ff -o uuid_range.txt
-```
-
-## Examples
-### **Generate UUIDs in Bulk and Save to File**
-```bash
-python3 uuidv1.py generate -t 1704505500-1704505600 -c 1000,1001 -n ffffffffffff -o uuids.txt
-```
-
-### **Extract Information from UUID v1**
-```bash
-python3 uuidv1.py decode 55b2e60c-b5a6-11ee-802a-acde48001122
 ```
 
 ## License
