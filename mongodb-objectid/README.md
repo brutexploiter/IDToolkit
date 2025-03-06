@@ -1,4 +1,4 @@
-# MongoDB ObjectID
+# mongoid
 A powerful command-line utility for working with MongoDB ObjectIDs. Decode existing ObjectIDs, encode components into new ObjectIDs, and generate ObjectIDs in bulk with flexible specifications.
 
 ## Features
@@ -15,18 +15,18 @@ A powerful command-line utility for working with MongoDB ObjectIDs. Decode exist
 
 1. **Download the script**
 ```bash
-curl -O https://raw.githubusercontent.com/brutexploiter/idtoolkit/main/mongodb-objectid/mongodb_oid
+curl -O https://raw.githubusercontent.com/brutexploiter/idtoolkit/main/mongodb-objectid/mongoid
 ```
 2. **Make executable**
 
 ```bash
-chmod +x mongodb_oid
+chmod +x mongoid
 ```
 3. **Verify installation**
 
 ```bash
-./mongodb_oid --version
-mongodb_oid v1.0.0
+./mongoid --version
+mongoid v1.0.0
 ```
 
 # Usage
@@ -34,20 +34,20 @@ mongodb_oid v1.0.0
 
 ```bash
 # Decode an ObjectID
-./mongodb_oid decode 64d94e71ac90fbbf3b7b8c79
+./mongoid decode 64d94e71ac90fbbf3b7b8c79
 
 # Encode components to ObjectID
-./mongodb_oid encode -t 1672531200 -m 123456 -p 54321 -c 987654
+./mongoid encode -t 1672531200 -m 123456 -p 54321 -c 987654
 
 # Generate ObjectIDs in bulk
-./mongodb_oid generate -t "2025-01-15T13:09:00Z..2025-01-15T13:09:01Z" \
+./mongoid generate -t "2025-01-15T13:09:00Z..2025-01-15T13:09:01Z" \
   -m 123456..123458 \
   -o output.txt
 ```
 ## Command Reference
 ### Decode
 ```bash
-./mongodb_oid decode [OPTIONS] <ObjectID>
+./mongoid decode [OPTIONS] <ObjectID>
 
 Options:
   -d, --debug    Show debug information
@@ -55,7 +55,7 @@ Options:
 ```
 ### Encode
 ```bash
-./mongodb_oid encode [OPTIONS]
+./mongoid encode [OPTIONS]
 
 Required Options:
   -t, --time TIME      Unix timestamp (0-4294967295)
@@ -65,7 +65,7 @@ Required Options:
 ```
 ### Generate
 ```bash
-./mongodb_oid generate [OPTIONS]
+./mongoid generate [OPTIONS]
 
 Options:
   -t, --time SPEC      Time specification (file:, range, or list)
