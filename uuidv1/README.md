@@ -29,11 +29,11 @@ python3 uuidv1.py [command] [options]
 ### **1. Decode a UUID v1**
 Extracts details such as timestamp, clock sequence, and node.
 ```bash
-python3 uuidv1.py decrypt <UUID>
+python3 uuidv1.py decode <UUID>
 ```
 **Example:**
 ```bash
-python3 uuidv1.py decrypt 55b2e60c-b5a6-11ee-802a-acde48001122
+python3 uuidv1.py decode 55b2e60c-b5a6-11ee-802a-acde48001122
 ```
 **Output:**
 ```
@@ -70,7 +70,7 @@ python3 uuidv1.py generate -t 1704505500-1704505600 -c 1000,1001 -n ffffffffffff
 
 ### **Extract Information from UUID v1**
 ```bash
-python3 uuidv1.py decrypt 55b2e60c-b5a6-11ee-802a-acde48001122
+python3 uuidv1.py decode 55b2e60c-b5a6-11ee-802a-acde48001122
 ```
 
 ## License
