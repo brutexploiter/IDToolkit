@@ -102,14 +102,14 @@ end
 begin
   options = {}
   global = OptionParser.new do |opts|
-    opts.banner = "Usage: mongodb_oid [OPTIONS] COMMAND [ARGS]"
+    opts.banner = "Usage: mongoid [OPTIONS] COMMAND [ARGS]"
     opts.separator "\nCommands:"
     opts.separator "  decode    Decode an ObjectID into its components"
     opts.separator "  encode    Create a single ObjectID from components"
     opts.separator "  generate  Generate multiple ObjectIDs from specifications"
     opts.separator "\nGlobal Options:"
     opts.on('-v', '--version', 'Show version') do
-      puts "mongodb_oid v#{VERSION}"
+      puts "mongoid v#{VERSION}"
       exit
     end
     opts.on('-h', '--help', 'Show help') do
