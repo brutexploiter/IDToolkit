@@ -1,4 +1,4 @@
-# mongoid
+# MongoDB ObjectID
 A powerful command-line utility for working with MongoDB ObjectIDs. Decode existing ObjectIDs, encode components into new ObjectIDs, and generate ObjectIDs in bulk with flexible specifications.
 
 ## Features
