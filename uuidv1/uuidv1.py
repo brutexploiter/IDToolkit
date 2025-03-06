@@ -104,12 +104,12 @@ def generate_uuids_file(uuid1, uuid2, filename="uuids.txt"):
     print(f"UUIDs saved to {filename}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="UUID v1 Tool - Generate, decrypt, and manipulate UUID v1 values.")
+    parser = argparse.ArgumentParser(description="UUID v1 Tool - Generate, decode UUID v1 values.")
     subparsers = parser.add_subparsers(dest="command")
 
-    # Decrypt Mode
-    decrypt_parser = subparsers.add_parser("decrypt", help="Decrypt a UUID v1 and extract details",usage="uuidv1.py decrypt uuid")
-    decrypt_parser.add_argument("uuid", help="The UUID v1 to decrypt")
+    # Decode Mode
+    decode_parser = subparsers.add_parser("decode", help="Decode a UUID v1 and extract details",usage="uuidv1.py decode uuid")
+    decode_parser.add_argument("uuid", help="The UUID v1 to decode")
 
     # Sandwich Mode
     sandwich_parser = subparsers.add_parser("sandwich", help="Generate all UUIDs between two UUID v1 values", usage="uuidv1.py sandwich uuid1 uuid2 [-o OUTPUT] [-m MACHINES]")
@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.command == "decrypt":
+    if args.command == "decode":
         decode_uuid_v1(args.uuid)
 
     elif args.command == "sandwich":
