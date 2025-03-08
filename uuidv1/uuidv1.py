@@ -101,13 +101,11 @@ args = parser.parse_args()
 
 def decode_uuid_v1(uuid_str):
     try:
-        # Remove hyphens and validate length
         uuid_str = uuid_str.replace("-", "")
         if len(uuid_str) != 32:
             print("Error: Invalid UUID length")
             return
 
-        # Convert hex string to bytes.
         raw_bytes = bytes.fromhex(uuid_str)
         time_low_int = int.from_bytes(raw_bytes[0:4], byteorder="big")
         time_mid_int = int.from_bytes(raw_bytes[4:6], byteorder="big")
@@ -125,24 +123,25 @@ def decode_uuid_v1(uuid_str):
         node_str = "".join(f"{b:02x}" for b in node_bytes)
         node_mac = ":".join(f"{b:02x}" for b in node_bytes)
 
-        # Determine variant.
+        # Determine variant and extract clock sequence
         cshr = clock_seq_hi_and_reserved_int
         if (cshr & 0x80) == 0:
             variant_str = "NCS"
+            clock_seq_int = ((cshr & 0x7F) << 8) | clock_seq_low_int
         elif (cshr & 0xC0) == 0x80:
             variant_str = "RFC4122"
+            clock_seq_int = ((cshr & 0x3F) << 8) | clock_seq_low_int
         elif (cshr & 0xE0) == 0xC0:
             variant_str = "Microsoft"
+            clock_seq_int = ((cshr & 0x1F) << 8) | clock_seq_low_int
         else:
             variant_str = "Future"
+            clock_seq_int = ((cshr & 0x0F) << 8) | clock_seq_low_int
 
         # Compute the 60-bit timestamp.
         timestamp_raw = ((time_hi_and_version_int & 0x0FFF) << 48) | (time_mid_int << 32) | time_low_int
         timestamp_seconds = (timestamp_raw - 0x01b21dd213814000) // 10000000
         timestamp_human = datetime.datetime.fromtimestamp(timestamp_seconds, datetime.UTC).strftime('%Y-%m-%d %H:%M:%S UTC')
-
-        # Get the clock sequence as a 14-bit integer.
-        clock_seq_int = int.from_bytes(raw_bytes[8:10], byteorder="big") & 0x3FFF
 
         col_width = 28
         print(f"{'Field'.ljust(col_width)}Value")
@@ -175,20 +174,28 @@ def get_uuid(timestamp, clock_seq, node, variant="RFC4122", version=1):
     time_mid = (timestamp >> 32) & 0xffff
     time_hi = (timestamp >> 48) & 0x0fff
     time_hi_and_version = (version << 12) | time_hi
-    cs = clock_seq & 0x3FFF
-    cs_low = cs & 0xff
-    cs_hi = (cs >> 8) & 0x3F
     variant_upper = variant.upper()
+
+    # Handle clock sequence based on variant
     if variant_upper == "NCS":
-        cs_hi = cs_hi | 0x40
-    elif variant_upper == "RFC4122":
-        cs_hi = cs_hi | 0x80
-    elif variant_upper == "MICROSOFT":
-        cs_hi = cs_hi | 0xC0
-    elif variant_upper == "FUTURE":
-        cs_hi = cs_hi | 0xE0
+        # NCS: 15-bit clock sequence (mask 0x7FFF)
+        cs = clock_seq & 0x7FFF
+        cs_hi = (cs >> 8) & 0x7F  # 7 bits (bit 7 must be 0)
+        cs_low = cs & 0xFF
     else:
-        cs_hi = cs_hi | 0x80
+        # RFC4122/Microsoft/Future: 14-bit clock sequence (mask 0x3FFF)
+        cs = clock_seq & 0x3FFF
+        cs_hi = (cs >> 8) & 0x3F  # 6 bits
+        if variant_upper == "RFC4122":
+            cs_hi |= 0x80  # Set variant bits 10xxxxxx
+        elif variant_upper == "MICROSOFT":
+            cs_hi |= 0xC0  # Set variant bits 110xxxxx
+        elif variant_upper == "FUTURE":
+            cs_hi |= 0xE0  # Set variant bits 111xxxxx
+        else:
+            cs_hi |= 0x80  # Default to RFC4122
+        cs_low = cs & 0xFF
+
     clock_seq_field = f"{cs_hi:02x}{cs_low:02x}"
     return f"{time_low:08x}-{time_mid:04x}-{time_hi_and_version:04x}-{clock_seq_field}-{node}"
 
